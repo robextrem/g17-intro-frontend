@@ -25,8 +25,7 @@ module.exports = {
                 },
                 'sass-loader'
             ]
-          }
-        
+        }
     ]
   }
 }
