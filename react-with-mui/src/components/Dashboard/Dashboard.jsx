@@ -28,10 +28,7 @@ const Dashboard = () => {
     console.log(showPassword);
   }, [showPassword]);
 
-
-  useEffect(() => {
-    alert(input)
-  },[])
+ 
   return (
     <Fragment>
       <input
