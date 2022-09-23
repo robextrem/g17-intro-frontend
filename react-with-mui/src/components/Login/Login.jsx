@@ -1,6 +1,8 @@
 import "./styles.login.css";
 import { useState, useEffect, Fragment } from "react";
 import { loginAPI } from "./api";
+import { Home } from "../";
+
 
 const Login = () => {
   const [user, setUser] = useState("eve.holt@reqres.in");
@@ -27,35 +29,39 @@ const Login = () => {
   return (
     <Fragment>
       <div className="container">
-        <div>
+        {isAuthenticate ? (
+          <Home user={user} signOut={setIsAuthenticate}/>
+        ) : (
           <div>
-            <input
-              placeholder="email"
-              type="email"
-              onChange={cambioEnUsuario}
-              value={user}
-            ></input>
+            <div>
+              <input
+                placeholder="email"
+                type="email"
+                onChange={cambioEnUsuario}
+                value={user}
+              ></input>
+            </div>
+            <div>
+              <input
+                placeholder="password"
+                type={showPassword ? "text" : "password"}
+                onChange={cambioEnContrasena}
+                value={password}
+              ></input>
+              <button onClick={mostrarContrasena}>👀</button>
+            </div>
+            <div className="button-signin">
+              <button
+                onClick={() =>
+                  loginAPI({ email: user, password }, setIsAuthenticate)
+                }
+              >
+                Sign In
+              </button>
+            </div>
           </div>
-          <div>
-            <input
-              placeholder="password"
-              type={showPassword ? "text" : "password"}
-              onChange={cambioEnContrasena}
-              value={password}
-            ></input>
-            <button onClick={mostrarContrasena}>👀</button>
-          </div>
-          <div className="button-signin">
-            <button
-              onClick={() =>
-                loginAPI({ email: user, password }, setIsAuthenticate)
-              }
-            >
-              Sign In
-            </button>
-          </div>
-        </div>
-        <div className="icon">{!isAuthenticate ? '🔐' : '🔓'}</div>
+        )}
+        <div className="icon">{!isAuthenticate ? "🔐" : "🔓"}</div>
       </div>
     </Fragment>
   );
