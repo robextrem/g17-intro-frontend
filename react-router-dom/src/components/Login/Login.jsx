@@ -1,14 +1,15 @@
 import "./styles.login.css";
 import { useState, useEffect, Fragment } from "react";
 import { loginAPI } from "../../utils/api";
-import { Home } from "../";
-
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [user, setUser] = useState("eve.holt@reqres.in");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isAuthenticate, setIsAuthenticate] = useState(false);
+
+  let navigate = useNavigate();
 
   const cambioEnUsuario = (event) => {
     setUser(event.target.value);
@@ -26,12 +27,15 @@ const Login = () => {
     localStorage.getItem("token") !== null && setIsAuthenticate(true);
   }, []);
 
+  useEffect(() => {
+    if (isAuthenticate){
+       return navigate("/dashboard");
+    }
+ },[isAuthenticate]);
+
   return (
     <Fragment>
       <div className="container">
-        {isAuthenticate ? (
-          <Home user={user} signOut={setIsAuthenticate}/>
-        ) : (
           <div>
             <div>
               <input
@@ -60,7 +64,7 @@ const Login = () => {
               </button>
             </div>
           </div>
-        )}
+        
         <div className="icon">{!isAuthenticate ? "🔐" : "🔓"}</div>
       </div>
     </Fragment>

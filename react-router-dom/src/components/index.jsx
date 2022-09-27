@@ -1,5 +1,5 @@
-import { Dashboard } from "./Dashboard/Dashboard";
+import { Users } from "./Users/Users";
 import { Login } from "./Login/Login";
 import { Home } from "./Home/Home";
 
-export { Login, Dashboard, Home };
+export { Login, Users, Home };
