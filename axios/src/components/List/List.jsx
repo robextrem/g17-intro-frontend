@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import {Pokemon} from "../Pokemon/Pokemon"
 import axios from 'axios';
 
 const List = () => {
@@ -25,7 +26,8 @@ const List = () => {
     <ul className="App">
       {
         pokemones.map(pokemon =>{
-          return (<li key={pokemon.number}><img src={pokemon.ThumbnailImage}/> {pokemon.name}</li>)
+          return <Pokemon id={pokemon.id} src={pokemon.ThumbnailImage} name={pokemon.name}></Pokemon>
+          //return (<li key={pokemon.number}><img src={pokemon.ThumbnailImage}/> {pokemon.name}</li>)
         })
       }
     </ul>
